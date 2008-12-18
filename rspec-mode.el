@@ -8,6 +8,8 @@
   nil
   " RSpec")
 (add-to-list 'auto-mode-alist '("_spec.rb$" . rspec-mode))
+(if (functionp 'yas/load-directory)
+    (yas/load-directory (concat (file-name-directory load-file-name) "snippets")))
 
 (defun rails-root (&optional dir)
   (or dir (setq dir default-directory))
