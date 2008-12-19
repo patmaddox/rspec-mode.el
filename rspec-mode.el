@@ -4,9 +4,19 @@
 ;;; Pat Maddox
 
 (define-derived-mode rspec-mode ruby-mode "RSpec")
+
 (add-to-list 'auto-mode-alist '("_spec.rb$" . rspec-mode))
 (if (functionp 'yas/load-directory)
     (yas/load-directory (concat (file-name-directory load-file-name) "snippets")))
+
+(setq rspec-mode-map
+  (let ((map (make-keymap)))
+    (define-key map (kbd "\C-c s") 'run-specs)
+    (define-key map (kbd "\C-c f") 'run-focused-spec)
+    map))
+
+(add-hook 'rspec-mode-hook
+          (lambda () (use-local-map rspec-mode-map)))
 
 (defun rails-root (&optional dir)
   (or dir (setq dir default-directory))
