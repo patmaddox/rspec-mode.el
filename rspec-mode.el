@@ -45,7 +45,7 @@
   (interactive)
   (do-run-spec (concat "--line=" (number-to-string (line-number-at-pos)))))
 
-(require 'linkify)
+(load (concat (file-name-directory load-file-name) "linkify"))
 (defun do-run-spec (&rest args)
   (setq rspec-results (get-buffer-create "rspec-results"))
   (save-excursion
